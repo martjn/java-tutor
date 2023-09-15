@@ -1,5 +1,3 @@
-package week5;
-
 import java.util.Calendar;
 
 class MyDate {
@@ -17,12 +15,49 @@ class MyDate {
     return this.year;
   }
 
+  public int getMonth() {
+    return this.month;
+  }
+
+  public int getDay() {
+    return this.day;
+  }
+
   public String toString() {
     return this.day + "." + this.month + "." + this.year;
   }
 
-  public int diffInYears(MyDate compareDate) {
-    return Math.abs((this.year) - (compareDate.getYear()));
+  public int getTotalDays() {
+    int temp_months = 0;
+    // get months from years
+    for (int i = 0; i < this.year; i++) {
+      for (int j = 0; j < 12; j++) {
+        temp_months += 1;
+      }
+    }
+    // get days from months
+    int temp_days = 0;
+    for (int i = 0; i < temp_months; i++) {
+      for (int j = 0; j < 30; j++) {
+        temp_days += 1;
+      }
+    }
+
+    return temp_days + this.day;
+  }
+
+  public int differenceInYears(MyDate compareDate) {
+    int calc = Math.abs(getTotalDays() - compareDate.getTotalDays());
+    int count = 0;
+    while (true) {
+      if (calc - 360 < 0) {
+        break;
+      } else {
+        calc -= 360;
+        count++;
+      }
+    }
+    return count;
   }
 }
 
@@ -35,13 +70,23 @@ class Person {
     this.birthday = new MyDate(pp, kk, vv);
   }
 
+  public Person(String name, MyDate birthday) {
+    this.name = name;
+    this.birthday = new MyDate(birthday.getDay(), birthday.getMonth(), birthday.getYear());
+
+  }
+
+  public Person(String name) {
+    this.birthday = new MyDate(Calendar.getInstance().get(Calendar.DAY_OF_MONTH),
+        Calendar.getInstance().get(Calendar.MONTH) + 1, Calendar.getInstance().get(Calendar.YEAR));
+  }
+
   public int age() {
-    Calendar.getInstance().get(Calendar.DATE);
     // calculate the age based on the birthday and the current day
     // you get the current day as follows:
-    // Calendar.getInstance().get(Calendar.DATE);
-    // Calendar.getInstance().get(Calendar.MONTH) + 1; // January is 0 so we add one
-    // Calendar.getInstance().get(Calendar.YEAR);
+    MyDate today_date = new MyDate(Calendar.getInstance().get(Calendar.DAY_OF_MONTH),
+        Calendar.getInstance().get(Calendar.MONTH) + 1, Calendar.getInstance().get(Calendar.YEAR));
+    return birthday.differenceInYears(today_date);
   }
 
   public String getName() {
@@ -51,18 +96,20 @@ class Person {
   public String toString() {
     return this.name + ", born " + this.birthday;
   }
+
+  public boolean olderThan(Person compared) {
+    int temp1 = this.birthday.getTotalDays();
+    int temp2 = compared.birthday.getTotalDays();
+    return temp1 > temp2;
+  }
 }
 
 public class Ex93 {
   public static void main(String[] args) {
-    MyDate first = new MyDate(24, 12, 2009);
-    MyDate second = new MyDate(1, 1, 2011);
-    MyDate third = new MyDate(25, 12, 2010);
+    Person pekka = new Person("Pekka", new MyDate(15, 2, 1983));
+    Person steve = new Person("Steve");
 
-    System.out.println(second + " and " + first + " difference in years: " + second.diffInYears(first));
-
-    System.out.println(third + " and " + first + " difference in years: " + third.diffInYears(first));
-
-    System.out.println(second + " and " + third + " difference in years: " + second.diffInYears(third));
+    System.out.println(pekka);
+    System.out.println(steve);
   }
 }
