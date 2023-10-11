@@ -123,5 +123,6 @@ public class Ex15 {
     hand.sortAgainstSuit();
 
     hand.print();
+
   }
 }
