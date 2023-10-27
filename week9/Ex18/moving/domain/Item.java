@@ -1,5 +1,7 @@
 package week9.Ex18.moving.domain;
 
+import week10.Ex32.boxes.Thing;
+
 public class Item implements Thing, Comparable<Item> {
   String name;
   int volume;

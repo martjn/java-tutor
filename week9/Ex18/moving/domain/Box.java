@@ -2,6 +2,8 @@ package week9.Ex18.moving.domain;
 
 import java.util.ArrayList;
 
+import week10.Ex32.boxes.Thing;
+
 public class Box implements Thing {
   int maximumCapacity;
   ArrayList<Thing> things;

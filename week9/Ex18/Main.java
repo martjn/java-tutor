@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import week10.Ex32.boxes.Thing;
 import week9.Ex18.moving.domain.Item;
-import week9.Ex18.moving.domain.Thing;
 import week9.Ex18.moving.domain.Box;
 import week9.Ex18.moving.logic.Packer;
 

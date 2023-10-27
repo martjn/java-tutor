@@ -1,9 +1,11 @@
 package week9.Ex18.moving.logic;
 
 import java.util.List;
+
+import week10.Ex32.boxes.Thing;
+
 import java.util.ArrayList;
 import week9.Ex18.moving.domain.Box;
-import week9.Ex18.moving.domain.Thing;
 
 public class Packer {
   int boxesVolume;
